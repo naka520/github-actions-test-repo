@@ -2,16 +2,23 @@ name: Context dump
 
 on:
   workflow_dispatch:
+  issues:
+    types: [opened]
 
 jobs:
   context-dump:
     runs-on: ubuntu-latest
     steps:
-      # コンテキスト `github` を出力するステップを書く
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+    - name: dump context
+      run: echo '${{ toJSON(github) }}'
 
-      - name: Dump event prop in GitHub context
-        run: echo "${{ toJson(github.event) }}"
+    - name: dump event context
+      run: echo '${{ toJSON(github.event) }}'
+
+    - name: workflow dispatch trigger
+      if: ${{ github.event_name == 'workflow_dispatch' }}
+      run: echo "Hello from workflow_dispatch"
+
+    - name: issues opened trigger
+      if: ${{ github.event_name == 'issues' && github.event.action == 'opened' }}
+      run: echo "Hello from issues.opened"
