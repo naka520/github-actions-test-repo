@@ -16,4 +16,4 @@ jobs:
       uses: actions/setup-dotnet@v5
 
     - name: dotnet build
-      run: dotnet build ./MyConsoleApp/obj/MyConsoleApp.csproj --configuration Release
+      run: dotnet build ./MyConsoleApp/MyConsoleApp.csproj --configuration Release
