@@ -1,1 +1,16 @@
 
+name: CI Dotnet
+
+on:
+  push:
+   branches:
+     - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+
+    - name: Dotnet SetUp
+      uses:
